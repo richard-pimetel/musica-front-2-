@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../style/main.css">
+    <script src="../scripts/main.js" type="module" defer></script>
+    <script src="../scripts/youtube-api.js" defer></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Projeto Músicas</title>
+</head>
+<body>
+    <div class="app-container">
+        <header class="app-header">
+            <div class="logo-container">
+                <i class="fas fa-music"></i>
+                <span class="logo-text">SoundStream</span>
+            </div>
+            <div class="search-bar">
+                <input type="text" id="pesquisa" placeholder="Buscar músicas, artistas...">
+                <button aria-label="Buscar"><i class="fas fa-search"></i></button>
+            </div>
+            <button id="btn-nova-musica" class="add-music-button">
+                <i class="fas fa-plus-circle"></i> Adicionar Música
+            </button>
+        </header>
+        <main class="app-main">
+            <div class="music-library">
+                <h2><i class="fas fa-compact-disc"></i> Sua Biblioteca</h2>
+                <div class="music-grid" id="container">
+                    </div>
+            </div>
+            <aside class="app-sidebar">
+                <div class="playlists">
+                    <h3><i class="fas fa-list-ul"></i> Playlists</h3>
+                    <ul>
+                        <li><a href="#"><i class="fas fa-heart"></i> Favoritas</a></li>
+                        <li><a href="#"><i class="fas fa-plus"></i> Nova Playlist</a></li>
+                        </ul>
+                </div>
+                <div class="genres">
+                    <h3><i class="fas fa-tag"></i> Gêneros</h3>
+                    <ul>
+                        <li><a href="#">Pop</a></li>
+                        <li><a href="#">Rock</a></li>
+                        <li><a href="#">Eletrônica</a></li>
+                        <li><a href="#">Hip Hop</a></li>
+                        </ul>
+                </div>
+            </aside>
+        </main>
+        <footer class="app-footer">
+            <div class="now-playing">
+                <div class="album-cover">
+                    <img src="https://img3.stockfresh.com/files/b/butenkow/m/97/7010299_stock-vector-vector-logo-music.jpg" alt="Capa da Música Atual" id="footer-album-cover">
+                </div>
+                <div class="song-info">
+                    <span class="song-title" id="footer-song-title">Nenhuma música tocando</span>
+                    <span class="artist-name" id="footer-artist-name"></span>
+                </div>
+                <div class="controls">
+                    <button aria-label="Anterior" id="footer-prev"><i class="fas fa-backward"></i></button>
+                    <button aria-label="Play" class="play-pause-button" id="footer-play-pause"><i class="fas fa-play"></i></button>
+                    <button aria-label="Próximo" id="footer-next"><i class="fas fa-forward"></i></button>
+                </div>
+            </div>
+            <div class="progress-bar-container">
+                <input type="range" id="progress-bar" value="0" min="0" max="100">
+            </div>
+            <audio id="footer-audio"></audio>
+            <div id="youtube-player" style="position: absolute; top: -9999px; left: -9999px;"></div>
+        </footer>
+
+        <div id="modal-musica" class="modal">
+            <div class="modal-content">
+                <span class="close">×</span>
+                <h2 id="modal-titulo"><i class="fas fa-music"></i> Adicionar Nova Melodia</h2>
+                <form id="form-musica">
+                    <input type="hidden" id="musica-id">
+                    <div class="form-group">
+                        <label for="nome"><i class="fas fa-signature"></i> Título da Canção</label>
+                        <input type="text" id="nome" placeholder="Digite o título" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="link"><i class="fas fa-link"></i> Link da Música (YouTube ou Áudio)</label>
+                        <input type="url" id="link" placeholder="Cole o link do áudio ou do YouTube">
+                    </div>
+                    <div class="form-group">
+                        <label for="duracao"><i class="fas fa-clock"></i> Tempo de Reprodução (mm:ss)</label>
+                        <input type="text" id="duracao" placeholder="Ex: 03:45" pattern="[0-9]{2}:[0-9]{2}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="data_lancamento"><i class="fas fa-calendar-alt"></i> Data de Lançamento</label>
+                        <input type="date" id="data_lancamento" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="foto_capa"><i class="fas fa-image"></i> URL da Capa (Opcional)</label>
+                        <input type="url" id="foto_capa" placeholder="Link da imagem da capa">
+                    </div>
+                    <div class="form-group">
+                        <label for="letra"><i class="fas fa-file-alt"></i> Letra da Música (Opcional)</label>
+                        <textarea id="letra" rows="5" placeholder="Escreva ou cole a letra"></textarea>
+                    </div>
+                    <button type="submit" class="btn-salvar"><i class="fas fa-check"></i> Salvar Melodia</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
